@@ -8,23 +8,26 @@ const ClientContactForm = ({
   editForm,
   setEditForm,
   isClickOutsideModal,
-
   contacts,
   setContacts,
 }) => {
   const onChangeHandler = (e, index) => {
-    const { name, value } = e.target;
+    let { name, value } = e.target;
+    if (!name && !value) {
+      name = e.target.dataset.name;
+      value = e.target.dataset.value;
+    }
     const updatedContacts = [...contacts];
     updatedContacts[index][name] = value;
-		setEditForm({ ...editForm, dirty: true });
+    setEditForm({ ...editForm, dirty: true });
     setContacts(updatedContacts);
   };
-	
-	const onDeleteHandler = (index) => {
-		const updatedContacts = [...contacts];
-		updatedContacts.splice(index, 1);
-		setContacts(updatedContacts);
-	}
+
+  const onDeleteHandler = (index) => {
+    const updatedContacts = [...contacts];
+    updatedContacts.splice(index, 1);
+    setContacts(updatedContacts);
+  };
 
   const addNewContact = () => {
     const newContact = {
@@ -32,7 +35,7 @@ const ClientContactForm = ({
       value: "",
       id: Date.now(),
     };
-		setEditForm({ ...editForm, dirty: true });
+    setEditForm({ ...editForm, dirty: true });
     setContacts([...contacts, newContact]);
   };
 
@@ -49,9 +52,9 @@ const ClientContactForm = ({
             setContacts={setContacts}
             contact={contact}
             onChange={(e) => onChangeHandler(e, index)}
-						onDelete={() => onDeleteHandler(index)}
+            onDelete={() => onDeleteHandler(index)}
             editForm={editForm}
-						setEditForm={setEditForm}
+            setEditForm={setEditForm}
             isClickOutsideModal={isClickOutsideModal}
           />
         );

@@ -8,6 +8,8 @@ import FilterForm from "./components/UI/filter/FilterForm";
 import { useClients } from "./hooks/useClients";
 import { debounce } from "./utils/utlis";
 import ConfirmationWindow from "./components/ConfirmationWindow";
+import Logo from "./components/UI/logo/Logo";
+import AddClientButton from "./components/UI/addClientButton/AddClientButton";
 
 function App() {
   const [clients, setClients] = useState([
@@ -138,7 +140,7 @@ function App() {
     secondname: "",
     contacts: [],
   });
-	const [contacts, setContacts] = useState([]);
+  const [contacts, setContacts] = useState([]);
   const [modalActive, setModalActive] = useState(false);
   const [isClickOutsideModal, setClickOutsideModal] = useState(false);
   const [filter, setFilter] = useState({
@@ -189,7 +191,9 @@ function App() {
     setClient(client);
   };
 
-	useEffect(() => {console.log(editForm)}, [editForm])
+  useEffect(() => {
+    console.log(editForm);
+  }, [editForm]);
 
   const closeModal = () => {
     if (!editForm) {
@@ -213,6 +217,7 @@ function App() {
   return (
     <div className="App">
       <Header>
+        <Logo width={50} height={50} color={"#9873FF"} />
         <FilterForm onChangeFilterHandler={debounceOnChangeFilterHandler} />
       </Header>
       <ClientModal
@@ -244,15 +249,20 @@ function App() {
           />
         )}
       </ClientModal>
-      <h2>Клиенты</h2>
-      <ClientsTable
-        clients={sortedAndFilteredClients}
-        filter={filter}
-        setFilter={setFilter}
-        openEditModal={openEditModal}
-        openDeleteModal={openDeleteModal}
-      />
-      <button onClick={openCreateClientModal}>Добавить клиента</button>
+      <div className="container container--table">
+        <h2 className="title">Клиенты</h2>
+        <ClientsTable
+          clients={sortedAndFilteredClients}
+          filter={filter}
+          setFilter={setFilter}
+          openEditModal={openEditModal}
+          openDeleteModal={openDeleteModal}
+        />
+        <AddClientButton
+          value={"Добавить клиента"}
+          onClick={openCreateClientModal}
+        />
+      </div>
     </div>
   );
 }

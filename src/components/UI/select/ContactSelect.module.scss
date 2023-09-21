@@ -1,0 +1,20 @@
+.select {
+    position: relative;
+
+    &__head {
+        user-select: none;
+        cursor: pointer;
+    }
+
+    &__body {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: #fff;
+    }
+    &__item {
+        padding: 10px;
+        cursor: pointer;
+    }
+}

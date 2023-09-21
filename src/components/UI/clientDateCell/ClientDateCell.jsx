@@ -4,11 +4,11 @@ import cl from './ClientDateCell.module.scss';
 
 const ClientDateCell = ({ unformattedDate }) => {
 	return (
-		<td>
-			<span style={{display: 'block'}}>
+		<td className={cl.cell}>
+			<span className={cl.date}>
 				{date.format(unformattedDate, 'DD.MM.YYYY')}
 			</span>
-			<span>
+			<span className={cl.time} >
 				{date.format(unformattedDate, 'HH:mm')}
 			</span>
 		</td>

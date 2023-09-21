@@ -1,0 +1,8 @@
+.icon {
+    transform-origin: center;
+    transition: all .2s;
+
+    &.ascend {
+        rotate: 180deg;
+    }
+}

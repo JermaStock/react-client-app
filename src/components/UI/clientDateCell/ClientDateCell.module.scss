@@ -1,8 +1,17 @@
-.contact-date {
-
+.cell {
 }
 
-.contact-time {
-	font-size: 12px;
-	color: gray;
+.date {
+	margin-right: 8px;
+	color: #333;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: normal;
+}
+
+.time {
+	color: #b0b0b0;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: normal;
 }

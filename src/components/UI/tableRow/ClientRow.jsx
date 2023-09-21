@@ -1,5 +1,5 @@
 import React from 'react';
-import cl from './ClientRow.module.css';
+import cl from './ClientRow.module.scss';
 
 const ClientRow = ({children, ...props}) => {
 	return (

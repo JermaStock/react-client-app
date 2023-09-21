@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ContactSelect from "./UI/select/ContactSelect";
 import ContactInput from "./UI/contactInput/ContactInput";
 
@@ -7,9 +7,9 @@ const ContactField = ({
   setClient,
   contact,
   onChange,
-	onDelete,
+  onDelete,
   editForm,
-	setEditForm,
+  setEditForm,
   isClickOutsideModal,
   index,
 
@@ -53,7 +53,22 @@ const ContactField = ({
       },
     },
   };
-	
+
+  const options = [
+    { value: "phone", name: "Телефон" },
+    { value: "email", name: "Email" },
+    { value: "vk", name: "Vk" },
+    { value: "fb", name: "Facebook" },
+    { value: "other", name: "Другое" },
+  ];
+
+  const [select, setSelect] = useState({
+    value: contact.type,
+    name: options.find((o) => o.value === contact.type)?.name,
+  });
+
+  console.log(contacts);
+
   return (
     <div
       style={{
@@ -66,13 +81,9 @@ const ContactField = ({
         value={contact.type}
         name="type"
         onChange={onChange}
-        options={[
-          { value: "phone", name: "Телефон" },
-          { value: "email", name: "Email" },
-          { value: "vk", name: "Vk" },
-          { value: "fb", name: "Facebook" },
-          { value: "other", name: "Другое" },
-        ]}
+        select={select}
+        setSelect={setSelect}
+        options={options}
       />
       <ContactInput
         index={index}
@@ -82,16 +93,15 @@ const ContactField = ({
         client={client}
         setClient={setClient}
         editForm={editForm}
-				setEditForm={setEditForm}
+        setEditForm={setEditForm}
         isClickOutsideModal={isClickOutsideModal}
         validationRules={validationRules}
-				
         contacts={contacts}
         setContacts={setContacts}
       />
-			<button onClick={onDelete} type='button'>
-				X
-			</button>
+      <button onClick={onDelete} type="button">
+        X
+      </button>
     </div>
   );
 };
