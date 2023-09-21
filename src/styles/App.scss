@@ -1,0 +1,39 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+button {
+	margin: 0;
+	padding: 0;
+	border: none;
+	background-color: transparent;
+	cursor: pointer;;
+}
+
+img {
+	max-width: 100%;
+	object-fit: cover;
+}
+
+.App {
+	padding: 15px;
+	max-width: calc(1186px + 15px * 2);
+	margin: 0 auto;
+}
+
+.client-form {
+	display: flex;
+	flex-direction: column;
+}
+
+.clients-table {
+	border-collapse: collapse;
+}
