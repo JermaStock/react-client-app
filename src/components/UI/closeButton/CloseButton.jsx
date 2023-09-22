@@ -4,7 +4,7 @@ import cl from './CloseButton.module.scss';
 
 const CloseButton = (props) => {
 	return (
-		<button className={cl.button}>
+		<button className={cl.button} {...props}>
 			<CloseIcon/>
 		</button>
 	);

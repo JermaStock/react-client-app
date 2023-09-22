@@ -30,6 +30,7 @@ const ContactField = ({
       title: "Email",
       rules: {
         isEmail: true,
+        maxLength: 30,
       },
     },
     vk: {
@@ -37,6 +38,7 @@ const ContactField = ({
       title: "vk",
       rules: {
         isEmpty: true,
+        maxLength: 30,
       },
     },
     fb: {
@@ -44,6 +46,7 @@ const ContactField = ({
       title: "fb",
       rules: {
         isEmpty: true,
+        maxLength: 30,
       },
     },
     other: {
@@ -51,6 +54,7 @@ const ContactField = ({
       title: "other",
       rules: {
         isEmpty: true,
+        maxLength: 30,
       },
     },
   };

@@ -45,7 +45,10 @@ const useValidation = (
           if (value.trim().length > validations[validation]) {
             setMaxLengthError(true);
             setErrorMessage(
+              name === 'Фамилия' || name === 'Отчество' || name === 'Имя' ? 
               `Макс. длина поля ${name} ${validations[validation]} символов(-а)`
+              :
+              `Макс. длина поля контактов ${validations[validation]} символов(-а)`
             );
           } else {
             setMaxLengthError(false);

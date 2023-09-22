@@ -25,6 +25,12 @@ const ContactInput = ({
     validationType.rules
   );
 
+  const rootClasses = [cl.input];
+
+  if (inputField.isDirty && !inputField.inputValid) {
+    rootClasses.push(cl.error);
+  }
+
   useEffect(() => {
     inputField.reset();
     setValidationType(validationRules[type]);
@@ -50,8 +56,8 @@ const ContactInput = ({
 
   return type === "phone" ? (
     <InputMask
-      placeholder='Введите данные контакта'
-      className={cl.input}
+      placeholder="Введите данные контакта"
+      className={rootClasses.join(" ")}
       mask="+7 (999) 999-99-99"
       name={name}
       value={inputField.value}
@@ -68,8 +74,8 @@ const ContactInput = ({
     />
   ) : (
     <input
-      placeholder='Введите данные контакта'
-      className={cl.input}
+      placeholder="Введите данные контакта"
+      className={rootClasses.join(" ")}
       name={name}
       value={inputField.value}
       onChange={(e) => {

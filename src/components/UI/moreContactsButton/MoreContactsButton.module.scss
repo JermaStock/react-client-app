@@ -8,4 +8,10 @@
     font-size: 8px;
     font-weight: 600;
     line-height: normal;
+    transition: background-color .2s ease-in-out, color .2s ease-in-out;
+
+    &:hover {
+        background-color: #9873FF;
+        color: #fff;
+    }
 }

@@ -11,4 +11,12 @@
     &::placeholder {
         color: #b0b0b0;
     }
+
+    &:focus {
+        outline: none;
+    }
+
+    &.danger {
+        border-color: red;
+    }
 }

@@ -33,10 +33,10 @@
         font-weight: 400;
         line-height: normal;
         cursor: pointer;
-        transition: background-color .2s linear;
+        transition: background-color 0.2s linear;
 
         &:hover {
-            background-color: #E7E5EB;
+            background-color: rgba(231, 229, 235, 0.5);
         }
     }
 }

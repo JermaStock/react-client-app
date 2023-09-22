@@ -17,13 +17,13 @@ const ClientsList = ({ clients, openEditModal, openDeleteModal }) => {
           <ClientDateCell unformattedDate={client.updatedAt} />
           <ClientContactCell contacts={client.contacts} />
           <td>
-            <ControlClientButton client={client} onClick={openEditModal}>
+            <ControlClientButton client={client} onClick={openEditModal} edit={true}>
               <EditIcon />
               Изменить
             </ControlClientButton>
           </td>
           <td>
-            <ControlClientButton client={client} onClick={openDeleteModal}>
+            <ControlClientButton client={client} onClick={openDeleteModal} del={true}>
               <DeleteIcon />
               Удалить
             </ControlClientButton>

@@ -2,5 +2,21 @@
     display: flex;
     align-items: flex-end;
     justify-content: center;
+    color: #333;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: normal;
+    transition: color 0.2s ease-in-out;
 
+    &__edit {
+        &:hover {
+            color: #9873ff;
+        }
+    }
+
+    &__del {
+        &:hover {
+            color: #F06A4D;
+        }
+    }
 }

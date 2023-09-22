@@ -1,4 +1,5 @@
 .input {
+    position: relative;
     margin: 0;
     padding: 8px 12px;
     border: none;
@@ -7,9 +8,18 @@
     font-size: 14px;
     font-weight: 600;
     line-height: normal;
+    transition: background-color .2s ease-in-out;
+
+    &.error {
+        background-color: rgba(240,106,77,0.2);;
+    }
 
     &::placeholder {
-        color: #B0B0B0;
+        color: #b0b0b0;
         font-weight: 400;
+    }
+
+    &:focus {
+        outline: none;
     }
 }

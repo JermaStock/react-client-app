@@ -7,6 +7,7 @@ import CloseButton from "./UI/closeButton/CloseButton";
 import ClientLabel from "./UI/label/ClientLabel";
 import { useInput } from "../hooks/useInput";
 import { destroyInputFields, formatName } from "../utils/utlis";
+import SimpleBar from "simplebar-react";
 
 const ClientsForm = ({
   client,
@@ -124,17 +125,22 @@ const ClientsForm = ({
 
   return (
     <form className="client-form">
-      <CloseButton onClick={closeFormModal} />
+      <CloseButton type="button" onClick={closeFormModal} />
       <h2 className="client-form__title">
         {editForm.opened ? (
           <div className="client-form__main-title">
-            Изменить данные <span className="client-form__main-title--id" >ID: {client.id}</span>
+            Изменить данные{" "}
+            <span className="client-form__main-title--id">ID: {client.id}</span>
           </div>
         ) : (
           <div className="client-form__main-title">Новый клиент</div>
         )}
       </h2>
-      <ClientLabel title="Фамилия" reqSymbol="*">
+      <ClientLabel
+        title="Фамилия"
+        reqSymbol="*"
+        isDanger={surname.isDirty && !surname.inputValid}
+      >
         <ClientInput
           value={surname.value}
           onChange={(e) => {
@@ -149,7 +155,11 @@ const ClientsForm = ({
           }}
         />
       </ClientLabel>
-      <ClientLabel title="Имя" reqSymbol="*">
+      <ClientLabel
+        title="Имя"
+        reqSymbol="*"
+        isDanger={name.isDirty && !name.inputValid}
+      >
         <ClientInput
           value={name.value}
           onChange={(e) => {
@@ -163,7 +173,10 @@ const ClientsForm = ({
           }}
         />
       </ClientLabel>
-      <ClientLabel title="Отчество">
+      <ClientLabel
+        title="Отчество"
+        isDanger={secondname.isDirty && !secondname.inputValid}
+      >
         <ClientInput
           value={secondname.value}
           onChange={(e) => {
