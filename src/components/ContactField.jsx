@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ContactSelect from "./UI/select/ContactSelect";
 import ContactInput from "./UI/contactInput/ContactInput";
+import DeleteContactButton from "./UI/deleteContactButton/DeleteContactButton";
 
 const ContactField = ({
   client,
@@ -71,6 +72,7 @@ const ContactField = ({
 
   return (
     <div
+      className="client-form-contacts__label"
       style={{
         display: "grid",
         gridTemplateColumns: "132px 1fr 30px",
@@ -99,9 +101,7 @@ const ContactField = ({
         contacts={contacts}
         setContacts={setContacts}
       />
-      <button onClick={onDelete} type="button">
-        X
-      </button>
+      <DeleteContactButton onClick={onDelete} type="button" />
     </div>
   );
 };

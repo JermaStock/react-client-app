@@ -1,0 +1,9 @@
+.icon {
+    rotate: 0;
+    transform-origin: center;
+    transition: rotate 0.1s;
+}
+
+.active {
+    rotate: 180deg;
+}

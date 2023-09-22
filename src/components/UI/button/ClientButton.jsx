@@ -1,8 +1,9 @@
 import React from 'react';
+import cl from './ClientButton.module.scss'
 
 const ClientButton = ({ children, ...props }) => {
 	return (
-		<button {...props}>
+		<button className={cl.button} {...props}>
 			{children}
 		</button>
 	);

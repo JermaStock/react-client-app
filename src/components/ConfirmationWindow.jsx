@@ -5,12 +5,18 @@ import ClientButton from "./UI/button/ClientButton";
 
 const ConfirmationWindow = ({ closeModal, client, deleteClient }) => {
   return (
-    <div>
+    <div className="confirm-modal">
       <CloseButton onClick={closeModal} />
-      <h3>Удалить клиент</h3>
-      <p>Вы действительно хотите удалить данного клиента?</p>
-      <ClientButton onClick={() => deleteClient(client)}>Удалить</ClientButton>
-      <ClientCancelButton onClick={closeModal}>Отмена</ClientCancelButton>
+      <h3 className="confirm-modal__title">Удалить клиент</h3>
+      <p className="confirm-modal__descr">
+        Вы действительно хотите удалить данного клиента?
+      </p>
+      <div className="confirm-modal__button-set">
+        <ClientButton onClick={() => deleteClient(client)}>
+          Удалить
+        </ClientButton>
+        <ClientCancelButton onClick={closeModal}>Отмена</ClientCancelButton>
+      </div>
     </div>
   );
 };

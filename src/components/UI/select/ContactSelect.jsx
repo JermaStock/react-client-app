@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import cl from "./ContactSelect.module.scss";
+import DropdownIcon from "../icons/DropdownIcon/DropdownIcon";
 
 const ContactSelect = ({
   options,
@@ -30,7 +31,12 @@ const ContactSelect = ({
       data-value={select.value}
       onClick={() => setIsActive(!isActive)}
     >
-      <div className={cl.select__head}>{select.name}</div>
+      <div className={cl.select__head}>
+        {select.name}
+        <DropdownIcon
+          isActive={isActive}
+        />
+      </div>
       {isActive && (
         <div className={cl.select__body}>
           {[

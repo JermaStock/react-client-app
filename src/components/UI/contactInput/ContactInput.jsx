@@ -50,6 +50,7 @@ const ContactInput = ({
 
   return type === "phone" ? (
     <InputMask
+      className={cl.input}
       mask="+7 (999) 999-99-99"
       name={name}
       value={inputField.value}
@@ -66,6 +67,7 @@ const ContactInput = ({
     />
   ) : (
     <input
+      className={cl.input}
       name={name}
       value={inputField.value}
       onChange={(e) => {

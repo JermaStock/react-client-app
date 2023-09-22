@@ -2,19 +2,41 @@
     position: relative;
 
     &__head {
+        padding: 10px 8px 11px 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-left: 1px solid #c8c5d1;
+        border-right: 1px solid #c8c5d1;
+        background-color: #e7e5eb;
+        color: #333;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: normal;
         user-select: none;
         cursor: pointer;
     }
 
     &__body {
         position: absolute;
+        z-index: 999;
         top: 100%;
         left: 0;
         width: 100%;
         background-color: #fff;
+        border: 1px solid #c8c5d1;
     }
     &__item {
         padding: 10px;
+        color: #333;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: normal;
         cursor: pointer;
+        transition: background-color .2s linear;
+
+        &:hover {
+            background-color: #E7E5EB;
+        }
     }
 }

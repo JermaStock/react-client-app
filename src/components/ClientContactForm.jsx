@@ -40,7 +40,7 @@ const ClientContactForm = ({
   };
 
   return (
-    <div style={{ marginTop: "50px" }}>
+    <div className={!contacts.length ? "client-form-contacts" : ["client-form-contacts", "client-form-contacts--active"].join(' ')}>
       {contacts.map((contact, index) => {
         return (
           <ContactField

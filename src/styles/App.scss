@@ -109,7 +109,7 @@ body {
 		font-weight: 400;
 		line-height: normal;
 	}
-	
+
 	&__cell {
 		padding-right: 20px;
 		font-size: 14px;
@@ -130,11 +130,105 @@ body {
 		display: grid;
 		grid-template-columns: repeat(5, 1fr);
 		gap: 5px;
-		
 	}
 }
 
 .client-form {
+	position: relative;
 	display: flex;
 	flex-direction: column;
+
+	&__title {
+		margin: 0;
+		margin-bottom: 16px;
+	}
+
+	&__main-title {
+		margin-right: 9px;
+		color: #333;
+		font-size: 18px;
+		font-weight: 700;
+		line-height: normal;
+
+		&--id {
+			color: #b0b0b0;
+			font-size: 12px;
+			font-weight: 400;
+			line-height: normal;
+		}
+	}
+
+	&__button-set {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 5px;
+		flex-direction: column;
+	}
+}
+
+.client-form-contacts {
+	padding: 8px 30px;
+	margin-inline: -30px;
+	background-color: rgba(200, 197, 209, 0.2);
+
+	&--active {
+		padding: 25px 30px;
+	}
+
+	&__label {
+		height: 37px;
+		border-top: 1px solid #c8c5d1;
+		border-bottom: 1px solid #c8c5d1;
+
+		&:not(:last-child) {
+			margin-bottom: 15px;
+		}
+	}
+}
+
+.confirm-modal {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	&__title {
+		margin: 0;
+		margin-bottom: 11px;
+		color: #333;
+		font-size: 18px;
+		font-weight: 700;
+		line-height: normal;
+	}
+
+	&__descr {
+		margin: 0;
+		margin-bottom: 25px;
+		max-width: 275px;
+		text-align: center;
+		color: #333;
+		font-size: 14px;
+		font-weight: 400;
+		line-height: normal;
+	}
+
+	&__button-set {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 5px;
+		flex-direction: column;
+	}
+}
+
+.error-block {
+	margin: 8px 0;
+	margin-bottom: 25px;
+	color: #f06a4d;
+	text-align: center;
+	font-size: 10px;
+	font-weight: 400;
+	line-height: normal;
 }

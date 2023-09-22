@@ -125,16 +125,16 @@ const ClientsForm = ({
   return (
     <form className="client-form">
       <CloseButton onClick={closeFormModal} />
-      <h2>
+      <h2 className="client-form__title">
         {editForm.opened ? (
-          <div>
-            Изменить данные <span>ID {client.id}</span>
+          <div className="client-form__main-title">
+            Изменить данные <span className="client-form__main-title--id" >ID: {client.id}</span>
           </div>
         ) : (
-          <div>Новый клиент</div>
+          <div className="client-form__main-title">Новый клиент</div>
         )}
       </h2>
-      <ClientLabel title="Фамилия">
+      <ClientLabel title="Фамилия" reqSymbol="*">
         <ClientInput
           value={surname.value}
           onChange={(e) => {
@@ -149,7 +149,7 @@ const ClientsForm = ({
           }}
         />
       </ClientLabel>
-      <ClientLabel title="Имя">
+      <ClientLabel title="Имя" reqSymbol="*">
         <ClientInput
           value={name.value}
           onChange={(e) => {
@@ -189,7 +189,7 @@ const ClientsForm = ({
       />
 
       {
-        <div>
+        <div className="error-block">
           {surname.isDirty && !surname.inputValid && (
             <div style={{ color: "red" }}>{surname.errorMessage}</div>
           )}
@@ -208,7 +208,7 @@ const ClientsForm = ({
       }
 
       {editForm.opened ? (
-        <div>
+        <div className="client-form__button-set">
           <ClientButton disabled={isValid()} onClick={changeExistingClient}>
             Сохранить
           </ClientButton>
@@ -217,7 +217,7 @@ const ClientsForm = ({
           </ClientCancelButton>
         </div>
       ) : (
-        <div>
+        <div className="client-form__button-set">
           <ClientButton disabled={isValid()} onClick={addNewClient}>
             Сохранить
           </ClientButton>
