@@ -222,6 +222,7 @@ function App() {
       </Header>
       <ClientModal
         modalActive={modalActive}
+        setModalActive={setModalActive}
         closeModal={() => {
           setModalActive(false);
           setClickOutsideModal(true);

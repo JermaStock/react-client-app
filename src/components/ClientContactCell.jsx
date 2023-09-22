@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ContactIcon from "./UI/contactIcon/ContactIcon";
 import MoreContactsButton from "./UI/moreContactsButton/MoreContactsButton";
+import { Tooltip } from "react-tooltip";
 
 const ClientContactCell = ({ contacts }) => {
   const [isHidden, setIsHidden] = useState(true);
@@ -13,8 +14,11 @@ const ClientContactCell = ({ contacts }) => {
             <li
               key={contact.id}
               className={index > 3 && isHidden ? "hidden" : ""}
+              data-tooltip-id={`contact-tooltp-${contact.id}`}
+              data-tooltip-content={contact.value}
             >
               <ContactIcon contact={contact} />
+              <Tooltip id={`contact-tooltp-${contact.id}`} clickable />
             </li>
           ))}
         </ul>

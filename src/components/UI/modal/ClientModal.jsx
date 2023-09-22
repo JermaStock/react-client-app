@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useRef } from "react";
 import classes from "./ClientModal.module.scss";
+import { useClickOutside } from "../../../hooks/useClickOutside";
 
 const ClientModal = ({ children, modalActive, closeModal }) => {
+  const modal = useRef(null);
   const rootClassesModal = [classes.modal];
   const rootClassesContent = [classes.modal__content];
 
@@ -10,12 +12,11 @@ const ClientModal = ({ children, modalActive, closeModal }) => {
     rootClassesContent.push(classes.active);
   }
 
+  useClickOutside(modal, closeModal);
+
   return (
-    <div className={rootClassesModal.join(" ")} onMouseDown={closeModal}>
-      <div
-        className={rootClassesContent.join(" ")}
-        onMouseDown={(e) => e.stopPropagation()}
-      >
+    <div className={rootClassesModal.join(" ")}>
+      <div ref={modal} className={rootClassesContent.join(" ")}>
         {children}
       </div>
     </div>

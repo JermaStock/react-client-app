@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import cl from "./ContactSelect.module.scss";
 import DropdownIcon from "../icons/DropdownIcon/DropdownIcon";
+import { useClickOutside } from "../../../hooks/useClickOutside";
 
 const ContactSelect = ({
   options,
@@ -11,21 +12,15 @@ const ContactSelect = ({
   setSelect,
 }) => {
   const [isActive, setIsActive] = useState(false);
+  const dropdown = useRef(null);
+
+  useClickOutside(dropdown, () => {
+    setIsActive(false);
+  });
 
   return (
-    // <select
-    // 	value={value}
-    // 	onChange={onChange}
-    // 	name={name}
-    // >
-    // 	{options.map(option =>
-    // 		<option key={option.value} value={option.value}>
-    // 			{option.name}
-    // 		</option>
-    // 	)}
-    // </select>
-
     <div
+      ref={dropdown}
       className={cl.select}
       data-name={name}
       data-value={select.value}
@@ -33,9 +28,7 @@ const ContactSelect = ({
     >
       <div className={cl.select__head}>
         {select.name}
-        <DropdownIcon
-          isActive={isActive}
-        />
+        <DropdownIcon isActive={isActive} />
       </div>
       {isActive && (
         <div className={cl.select__body}>
@@ -52,12 +45,6 @@ const ContactSelect = ({
                     onChange(e);
                     setSelect({ value: option.value, name: option.name });
                   }}
-                  // onClick={(e) => {
-                  //   setSelect({
-                  //     name: e.target.textContent,
-                  //     value: option.value,
-                  //   });
-                  // }}
                 >
                   {option.name}
                 </div>

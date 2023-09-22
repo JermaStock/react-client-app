@@ -6,4 +6,8 @@
     font-size: 14px;
     font-weight: 600;
     line-height: normal;
+
+    &:disabled {
+        opacity: 0.8;
+    }
 }

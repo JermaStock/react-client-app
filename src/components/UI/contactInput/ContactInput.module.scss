@@ -7,4 +7,9 @@
     font-size: 14px;
     font-weight: 600;
     line-height: normal;
+
+    &::placeholder {
+        color: #B0B0B0;
+        font-weight: 400;
+    }
 }
