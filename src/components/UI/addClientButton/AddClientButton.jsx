@@ -6,9 +6,7 @@ const AddClientButton = ({ onClick, ...props }) => {
   return (
     <div className={cl.wrapper}>
       <button className={cl.button} onClick={onClick}>
-        <IconUser
-            style={{marginRight: '10px'}}
-        />
+        <IconUser/>
         {props.value}
       </button>
     </div>

@@ -40,6 +40,11 @@ const ClientsForm = ({
   };
   const [contacts, setContacts] = useState([]);
   const [validationErrors, setValidationErrors] = useState([]);
+  const [isFocus, setIsFocus] = useState({
+    surnameFocus: false,
+    nameFocus: false,
+    secondnameFocus: false,
+  });
 
   useEffect(() => {
     setContacts(structuredClone(client.contacts));
@@ -140,6 +145,8 @@ const ClientsForm = ({
         title="Фамилия"
         reqSymbol="*"
         isDanger={surname.isDirty && !surname.inputValid}
+        filled={surname.value}
+        isFocus={isFocus.surnameFocus}
       >
         <ClientInput
           value={surname.value}
@@ -152,13 +159,17 @@ const ClientsForm = ({
               surname.destroy();
               console.log("Выход с blur фамилии", client);
             }
+            setIsFocus({...isFocus, surnameFocus: false});
           }}
+          onFocus={() => setIsFocus({...isFocus, surnameFocus: true})}
         />
       </ClientLabel>
       <ClientLabel
         title="Имя"
         reqSymbol="*"
         isDanger={name.isDirty && !name.inputValid}
+        filled={name.value}
+        isFocus={isFocus.nameFocus}
       >
         <ClientInput
           value={name.value}
@@ -170,12 +181,16 @@ const ClientsForm = ({
             if (isClickOutsideModal && client.id) {
               name.destroy();
             }
+            setIsFocus({...isFocus, nameFocus: false});
           }}
+          onFocus={() => setIsFocus({...isFocus, nameFocus: true})}
         />
       </ClientLabel>
       <ClientLabel
         title="Отчество"
         isDanger={secondname.isDirty && !secondname.inputValid}
+        filled={secondname.value}
+        isFocus={isFocus.secondnameFocus}
       >
         <ClientInput
           value={secondname.value}
@@ -187,7 +202,9 @@ const ClientsForm = ({
             if (isClickOutsideModal && client.id) {
               secondname.destroy();
             }
+            setIsFocus({...isFocus, secondnameFocus: false});
           }}
+          onFocus={() => setIsFocus({...isFocus, secondnameFocus: true})}
         />
       </ClientLabel>
 

@@ -6,8 +6,13 @@
     font-size: 14px;
     font-weight: 600;
     line-height: normal;
+    transition: background-color .15s, border-color .15s;
 
     &:disabled {
-        opacity: 0.8;
+        background-color: #c8c5d1;
+    }
+
+    &:hover:enabled {
+        background-color: #8052FF;;
     }
 }

@@ -6,9 +6,12 @@ const ClientLabel = ({
   isDanger,
   title,
   reqSymbol = "",
+  filled,
+  isFocus,
   ...props
 }) => {
   const rootLabelClasses = [cl.label];
+  const rootLabelTitleClasses = [cl.label__title];
   const rootTitleClasses = [cl.label__text];
 
 
@@ -16,10 +19,13 @@ const ClientLabel = ({
     rootLabelClasses.push(cl.error);
     rootTitleClasses.push(cl.error);
   }
+  if (filled || isFocus) {
+    rootLabelTitleClasses.push(cl.focus);
+  }
 
   return (
     <label className={rootLabelClasses.join(' ')} {...props}>
-      <span className={cl.label__title}>
+      <span className={rootLabelTitleClasses.join(' ')}>
         <span className={rootTitleClasses.join(' ')}>{title}</span>
         <span className={cl.label__req}>{reqSymbol}</span>
       </span>

@@ -3,6 +3,7 @@
     align-items: center;
     justify-content: center;
     color: #b0b0b0;
+    text-align: left;
     font-size: 12px;
     font-weight: 400;
     line-height: normal;
@@ -14,5 +15,9 @@
 
     &:hover {
         color: #9873FF;
+    }
+
+    &__content {
+        vertical-align: bottom;
     }
 }

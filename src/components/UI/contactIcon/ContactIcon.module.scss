@@ -5,10 +5,12 @@
     &::after {
         position: absolute;
         content: "";
-        top: 0;
+        top: 1px;
         left: 0;
         right: 0;
         bottom: 0;
+        width: 16px;
+        height: 16px;
         border-radius: 100px;
         opacity: 1;
         background-color: rgba(231, 229, 235, 0.5);

@@ -4,19 +4,29 @@
     padding: 8px 12px;
     border: none;
     background-color: transparent;
+    border-top: 1px solid #c8c5d1;
+    border-bottom: 1px solid #c8c5d1;
     color: #333;
     font-size: 14px;
     font-weight: 600;
     line-height: normal;
-    transition: background-color .2s ease-in-out;
+    transition: background-color 0.2s ease-in-out;
+
+    @media (max-width: 540px) {
+        padding: 8px 6px;
+    }
 
     &.error {
-        background-color: rgba(240,106,77,0.2);;
+        background-color: rgba(240, 106, 77, 0.2);
     }
 
     &::placeholder {
         color: #b0b0b0;
         font-weight: 400;
+
+        @media (max-width: 540px) {
+            font-size: 15.5px;
+        }
     }
 
     &:focus {

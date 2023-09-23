@@ -11,14 +11,21 @@
 	background-color: rgba($color: #333, $alpha: 0.6);
 	opacity: 0;
 	pointer-events: none;
-
 }
 
 .modal__content {
 	padding: 24px 30px 30px;
+	max-height: 600px;
+	overflow-y: auto;
 	min-width: 450px;
 	background-color: #fff;
 	scale: 0;
+
+	@media (max-width: 540px) {
+		min-width: auto;
+		width: 300px;
+		padding: 25px 15px;
+	}
 }
 
 .modal.active {

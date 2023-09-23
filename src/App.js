@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./styles/App.scss";
+import "./styles/main.scss";
 import ClientsForm from "./components/ClientsForm";
 import ClientsTable from "./components/ClientsTable";
 import ClientModal from "./components/UI/modal/ClientModal";

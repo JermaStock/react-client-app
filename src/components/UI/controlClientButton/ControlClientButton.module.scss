@@ -11,12 +11,18 @@
     &__edit {
         &:hover {
             color: #9873ff;
+            svg {
+                opacity: 1;
+            }
         }
     }
 
     &__del {
         &:hover {
-            color: #F06A4D;
+            color: #f06a4d;
+            svg {
+                opacity: 1;
+            }
         }
     }
 }

@@ -4,6 +4,7 @@
     font-size: 12px;
     font-weight: 400;
     line-height: normal;
+    transition: color .2s;
 
     &::after {
         position: absolute;
@@ -13,5 +14,14 @@
         left: 0;
         bottom: 1px;
         background-color: #333;
+        transition: background-color .2s;
+    }
+
+    &:hover {
+        color: #9873FF;
+
+        &::after {
+            background-color: #9873FF;
+        }
     }
 }

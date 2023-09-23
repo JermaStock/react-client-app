@@ -7,6 +7,10 @@
 	font-size: 14px;
 	font-weight: 400;
 	line-height: normal;
+
+	@media (max-width: 961px) {
+		display: block;
+	}
 }
 
 .time {
@@ -14,4 +18,8 @@
 	font-size: 14px;
 	font-weight: 400;
 	line-height: normal;
+
+	@media (max-width: 961px) {
+		display: block;
+	}
 }

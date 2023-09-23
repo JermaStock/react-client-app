@@ -3,8 +3,6 @@ import ClientRow from "./UI/tableRow/ClientRow";
 import ClientContactCell from "./ClientContactCell";
 import ClientDateCell from "./UI/clientDateCell/ClientDateCell";
 import ControlClientButton from "./UI/controlClientButton/ControlClientButton";
-import EditIcon from "./UI/icons/EditIcon";
-import DeleteIcon from "./UI/icons/DeleteIcon";
 
 const ClientsList = ({ clients, openEditModal, openDeleteModal }) => {
   return (
@@ -17,16 +15,19 @@ const ClientsList = ({ clients, openEditModal, openDeleteModal }) => {
           <ClientDateCell unformattedDate={client.updatedAt} />
           <ClientContactCell contacts={client.contacts} />
           <td>
-            <ControlClientButton client={client} onClick={openEditModal} edit={true}>
-              <EditIcon />
-              Изменить
-            </ControlClientButton>
-          </td>
-          <td>
-            <ControlClientButton client={client} onClick={openDeleteModal} del={true}>
-              <DeleteIcon />
-              Удалить
-            </ControlClientButton>
+            <div className="clients-table__cell-control">
+              <ControlClientButton
+                client={client}
+                onClick={openEditModal}
+                title="Изменить"
+              />
+              <ControlClientButton
+                client={client}
+                onClick={openDeleteModal}
+                del={true}
+                title="Удалить"
+              />
+            </div>
           </td>
         </ClientRow>
       ))}

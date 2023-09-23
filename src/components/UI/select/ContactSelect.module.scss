@@ -8,6 +8,8 @@
         align-items: center;
         border-left: 1px solid #c8c5d1;
         border-right: 1px solid #c8c5d1;
+        border-top: 1px solid #c8c5d1;
+		border-bottom: 1px solid #c8c5d1;
         background-color: #e7e5eb;
         color: #333;
         font-size: 12px;
@@ -25,6 +27,7 @@
         width: 100%;
         background-color: #fff;
         border: 1px solid #c8c5d1;
+        border-top: none;
     }
     &__item {
         padding: 10px;

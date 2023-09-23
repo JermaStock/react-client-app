@@ -8,6 +8,14 @@
     font-weight: 400;
     line-height: normal;
 
+    @media (max-width: 766px) {
+        width: 250px;
+    }
+
+    @media (max-width: 460px) {
+        width: 100%;
+    }
+
     &::placeholder {
         color: #b0b0b0;
     }

@@ -1,24 +1,21 @@
 import React from "react";
 import cl from "./ControlClientButton.module.scss";
+import EditIcon from "../icons/EditIcon";
+import DeleteIcon from "../icons/DeleteIcon";
 
-const ControlClientButton = ({
-  children,
-  onClick,
-  client,
-  edit = false,
-  del = false,
-}) => {
+const ControlClientButton = ({ title, onClick, client, del = false }) => {
   let rootClasses = [cl.button];
 
-  if (edit) {
-    rootClasses.push(cl.button__edit);
-  } else if (del) {
+  if (del) {
     rootClasses.push(cl.button__del);
+  } else {
+    rootClasses.push(cl.button__edit);
   }
 
   return (
     <button className={rootClasses.join(" ")} onClick={() => onClick(client)}>
-      {children}
+      {del ? <DeleteIcon /> : <EditIcon />}
+      {title}
     </button>
   );
 };

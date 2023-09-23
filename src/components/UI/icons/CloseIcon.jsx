@@ -1,4 +1,5 @@
 import React from "react";
+import cl from './CloseIcon.module.scss'
 
 const CloseIcon = () => {
   return (
@@ -7,13 +8,13 @@ const CloseIcon = () => {
       width="29"
       height="29"
       viewBox="0 0 29 29"
-      fill="none"
+      className={cl.icon}
+      fill="currentColor"
     >
       <path
         fillRule="evenodd"
         clipRule="evenodd"
         d="M22.2332 7.73333L21.2665 6.76666L14.4998 13.5334L7.73318 6.7667L6.76652 7.73336L13.5332 14.5L6.76654 21.2667L7.73321 22.2333L14.4998 15.4667L21.2665 22.2334L22.2332 21.2667L15.4665 14.5L22.2332 7.73333Z"
-        fill="#B0B0B0"
       />
     </svg>
   );

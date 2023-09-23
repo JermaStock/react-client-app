@@ -77,11 +77,6 @@ const ContactField = ({
   return (
     <div
       className="client-form-contacts__label"
-      style={{
-        display: "grid",
-        gridTemplateColumns: "132px 1fr 30px",
-        marginBottom: "15px",
-      }}
     >
       <ContactSelect
         value={contact.type}

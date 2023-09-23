@@ -1,5 +1,12 @@
 .button {
     position: absolute;
     top: -10px;
-    right: -10px
+    right: -10px;
+    color: #C8C5D1;
+
+    &:hover {
+        svg {
+            fill: #9873FF;
+        }
+    }
 }

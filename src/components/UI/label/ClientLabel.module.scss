@@ -2,6 +2,7 @@
 	position: relative;
 	display: flex;
 	flex-direction: column;
+	padding-top: 19px;
 	font-size: 10px;
 	font-weight: 400;
 	line-height: normal;
@@ -33,8 +34,16 @@
 	}
 
 	&__title {
+		position: absolute;
 		display: block;
 		margin-bottom: 8px;
+		font-size: 14px;
+		transition: transform .125s ease-in-out, font-size .125s ease-in-out;
+
+		&.focus {
+			font-size: 10px;
+			transform: translateY(-15px);
+		}
 	}
 
 	&__text {
