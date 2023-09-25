@@ -2,22 +2,27 @@ import React, { useEffect, useState } from "react";
 import cl from "./ContactInput.module.scss";
 import { useInput } from "../../../hooks/useInput";
 import InputMask from "react-input-mask";
+import { useDispatch, useSelector } from "react-redux";
+import { changeFormDirtiness } from "../../../store/formSlice";
 
 const ContactInput = ({
-  client,
-  setClient,
+  // client,
+  // setClient,
   contact: { value, type },
   onChange,
   name,
   validationRules,
-  editForm,
-  setEditForm,
-  isClickOutsideModal,
+  // editForm,
+  // setEditForm,
+  // isClickOutsideModal,
   index,
 
   contacts,
   setContacts,
 }) => {
+  const editForm = useSelector((store) => store.form);
+  const dispatch = useDispatch();
+
   const [validationType, setValidationType] = useState(validationRules.email);
   const inputField = useInput(
     validationType.title,
@@ -41,6 +46,7 @@ const ContactInput = ({
   }, []);
 
   useEffect(() => {
+    console.log('ебано', editForm);
     if (editForm.dirty) {
       const validatedContacts = [...contacts];
       const newError = inputField;
@@ -68,7 +74,12 @@ const ContactInput = ({
       onBlur={() => {
         inputField.onBlur();
         if (editForm.opened) {
-          setEditForm({ ...editForm, dirty: true });
+          // setEditForm({ ...editForm, dirty: true });
+          dispatch(changeFormDirtiness({ dirty: true }));
+        }
+
+        if (editForm.isFormClosedByBlur) {
+          setContacts([]);
         }
       }}
     />
@@ -85,7 +96,12 @@ const ContactInput = ({
       onBlur={() => {
         inputField.onBlur();
         if (editForm.opened) {
-          setEditForm({ ...editForm, dirty: true });
+          // setEditForm({ ...editForm, dirty: true });
+          dispatch(changeFormDirtiness({ dirty: true }));
+        } 
+
+        if (!editForm.isFormClosedByBlur) {
+          dispatch(changeFormDirtiness({ dirty: true }));
         }
       }}
     />

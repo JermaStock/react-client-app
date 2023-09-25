@@ -2,14 +2,14 @@ import React from "react";
 import ClientsList from "./ClientsList";
 import ClientSortButton from "./UI/sortButton/ClientSortButton";
 import IconArrow from "./UI/icons/IconArrow";
+import { useSelector } from "react-redux";
 
 const ClientTable = ({
-  clients,
-  filter,
-  setFilter,
   openEditModal,
   openDeleteModal,
 }) => {
+  const filter = useSelector(store => store.filter);
+
   return (
     <div className="table-overlay">
       <table bordercolor="#f5f5f5" className="clients-table">
@@ -26,7 +26,6 @@ const ClientTable = ({
             <th>
               <ClientSortButton
                 filter={filter}
-                setFilter={setFilter}
                 sortValue="id"
                 title="ID"
               >
@@ -36,7 +35,6 @@ const ClientTable = ({
             <th>
               <ClientSortButton
                 filter={filter}
-                setFilter={setFilter}
                 sortValue="fullname"
                 title="Фамилия Имя Отчество"
               >
@@ -46,7 +44,6 @@ const ClientTable = ({
             <th>
               <ClientSortButton
                 filter={filter}
-                setFilter={setFilter}
                 sortValue="createdAt"
                 title="Дата и время создания"
               >
@@ -56,7 +53,6 @@ const ClientTable = ({
             <th>
               <ClientSortButton
                 filter={filter}
-                setFilter={setFilter}
                 sortValue="updatedAt"
                 title="Последние изменения"
               >
@@ -70,7 +66,7 @@ const ClientTable = ({
           </tr>
         </thead>
         <ClientsList
-          clients={clients}
+          filter={filter}
           openEditModal={openEditModal}
           openDeleteModal={openDeleteModal}
         />

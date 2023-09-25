@@ -4,10 +4,18 @@ import ClientContactCell from "./ClientContactCell";
 import ClientDateCell from "./UI/clientDateCell/ClientDateCell";
 import ControlClientButton from "./UI/controlClientButton/ControlClientButton";
 
-const ClientsList = ({ clients, openEditModal, openDeleteModal }) => {
+import { useSelector } from "react-redux";
+import { useClients } from "../hooks/useClients";
+
+
+const ClientsList = ({ openEditModal, openDeleteModal }) => {
+  const clients = useSelector(store => store.clients.clients);
+  const filter = useSelector(store => store.filter);
+  const sortedAndFilteredClients = useClients(clients, filter);
+
   return (
     <tbody className="clients-table__body">
-      {clients.map((client) => (
+      {sortedAndFilteredClients.map((client) => (
         <ClientRow key={client.id}>
           <td className="clients-table__cell">{client.id}</td>
           <td className="clients-table__cell">{client.fullname}</td>

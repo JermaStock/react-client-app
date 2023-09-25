@@ -7,20 +7,33 @@ import CloseButton from "./UI/closeButton/CloseButton";
 import ClientLabel from "./UI/label/ClientLabel";
 import { useInput } from "../hooks/useInput";
 import { destroyInputFields, formatName } from "../utils/utlis";
-import SimpleBar from "simplebar-react";
+import { useDispatch, useSelector } from "react-redux";
+import { clearClient, createClient, editClient } from "../store/clientsSlice";
+import {
+  changeModalVisible,
+  hadndleClickOutsideModal,
+} from "../store/modalSlice";
+import {
+  changeFormOpening,
+  handleFormClosingByBlur,
+  resetFormHandler,
+} from "../store/formSlice";
 
 const ClientsForm = ({
-  client,
-  setClient,
+  // client,
+  // setClient,
   closeModal,
-  createClient,
-  editClient,
-  editForm,
-  setEditForm,
+  // editForm,
+  // setEditForm,
   openDeleteModal,
-  isClickOutsideModal,
-  setClickOutsideModal,
+  // isClickOutsideModal,
+  // setClickOutsideModal,
 }) => {
+  const client = useSelector((store) => store.clients.client);
+  const editForm = useSelector((store) => store.form);
+  const modal = useSelector((store) => store.modal);
+  const dispatch = useDispatch();
+
   const { surname, name, secondname } = {
     surname: useInput("Фамилия", client.surname, {
       maxLength: 20,
@@ -38,6 +51,7 @@ const ClientsForm = ({
       required: false,
     }),
   };
+
   const [contacts, setContacts] = useState([]);
   const [validationErrors, setValidationErrors] = useState([]);
   const [isFocus, setIsFocus] = useState({
@@ -61,58 +75,99 @@ const ClientsForm = ({
   }, [contacts]);
 
   useEffect(() => {
-    if (isClickOutsideModal && !editForm.opened) {
+    if (!editForm.opened) {
       destroyInputFields([surname, name, secondname]);
+      // dispatch(hadndleClickOutsideModal(true));
+      dispatch(handleFormClosingByBlur({ isFormClosedByBlur: true }));
     }
-    setClickOutsideModal(false);
   }, [editForm.opened]);
 
-  const addNewClient = (e) => {
-    e.preventDefault();
-    const newClient = {
-      surname: formatName(surname.value),
-      name: formatName(name.value),
-      secondname: formatName(secondname.value),
-      contacts: [
-        ...contacts.map((c) => ({
-          type: c.type,
-          value: c.value,
-          id: c.id,
-        })),
-      ],
-      id: Date.now(),
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
-    createClient(newClient);
+  const addNewClient = () => {
+    dispatch(
+      createClient({
+        surname: formatName(surname.value),
+        name: formatName(name.value),
+        secondname: formatName(secondname.value),
+        contacts: [
+          ...contacts.map((c) => ({
+            type: c.type,
+            value: c.value,
+            id: c.id,
+          })),
+        ],
+      })
+    );
+    dispatch(clearClient());
+    dispatch(changeModalVisible(false));
+    destroyInputFields([surname, name, secondname]);
+    // setContacts([]);
+  };
+
+  // const addNewClient = (e) => {
+  //   e.preventDefault();
+  //   const newClient = {
+  //     surname: formatName(surname.value),
+  //     name: formatName(name.value),
+  //     secondname: formatName(secondname.value),
+  //     contacts: [
+  //       ...contacts.map((c) => ({
+  //         type: c.type,
+  //         value: c.value,
+  //         id: c.id,
+  //       })),
+  //     ],
+  //     id: Date.now(),
+  //     createdAt: new Date(),
+  //     updatedAt: new Date(),
+  //   };
+  //   createClient(newClient);
+  //   destroyInputFields([surname, name, secondname]);
+  // };
+
+  const changeExistingClient = () => {
+    dispatch(
+      editClient({
+        surname: formatName(surname.value),
+        name: formatName(name.value),
+        secondname: formatName(secondname.value),
+        contacts: [
+          ...contacts.map((c) => ({
+            type: c.type,
+            value: c.value,
+            id: c.id,
+          })),
+        ],
+      })
+    );
+    dispatch(clearClient());
+    dispatch(changeModalVisible(false));
     destroyInputFields([surname, name, secondname]);
   };
 
-  const changeExistingClient = (e) => {
-    e.preventDefault();
-    const editedClient = {
-      ...client,
-      surname: formatName(surname.value),
-      name: formatName(name.value),
-      secondname: formatName(secondname.value),
-      updatedAt: new Date(),
-      contacts: [
-        ...contacts.map((c) => ({
-          type: c.type,
-          value: c.value,
-          id: c.id,
-        })),
-      ],
-    };
-    editClient(editedClient);
-    destroyInputFields([surname, name, secondname]);
-  };
+  // const changeExistingClient = (e) => {
+  //   e.preventDefault();
+  //   const editedClient = {
+  //     ...client,
+  //     surname: formatName(surname.value),
+  //     name: formatName(name.value),
+  //     secondname: formatName(secondname.value),
+  //     updatedAt: new Date(),
+  //     contacts: [
+  //       ...contacts.map((c) => ({
+  //         type: c.type,
+  //         value: c.value,
+  //         id: c.id,
+  //       })),
+  //     ],
+  //   };
+  //   editClient(editedClient);
+  //   destroyInputFields([surname, name, secondname]);
+  // };
 
   const isValid = () => {
     if (editForm.opened && !editForm.dirty) {
       return !surname.inputValid || !name.inputValid || !secondname.inputValid;
     }
-
     return (
       !surname.inputValid ||
       !name.inputValid ||
@@ -123,14 +178,15 @@ const ClientsForm = ({
     );
   };
 
-  const closeFormModal = () => {
+  const cancelOperationOnClient = () => {
     destroyInputFields([surname, name, secondname]);
+    setContacts([]);
     closeModal();
   };
 
   return (
-    <form className="client-form">
-      <CloseButton type="button" onClick={closeFormModal} />
+    <form className="client-form" onSubmit={(e) => e.preventDefault()}>
+      <CloseButton type="button" onClick={cancelOperationOnClient} />
       <h2 className="client-form__title">
         {editForm.opened ? (
           <div className="client-form__main-title">
@@ -155,13 +211,13 @@ const ClientsForm = ({
           }}
           onBlur={() => {
             surname.onBlur();
-            if (isClickOutsideModal && client.id) {
+            if (editForm.isFormClosedByBlur) {
               surname.destroy();
               console.log("Выход с blur фамилии", client);
             }
-            setIsFocus({...isFocus, surnameFocus: false});
+            setIsFocus({ ...isFocus, surnameFocus: false });
           }}
-          onFocus={() => setIsFocus({...isFocus, surnameFocus: true})}
+          onFocus={() => setIsFocus({ ...isFocus, surnameFocus: true })}
         />
       </ClientLabel>
       <ClientLabel
@@ -178,12 +234,12 @@ const ClientsForm = ({
           }}
           onBlur={() => {
             name.onBlur();
-            if (isClickOutsideModal && client.id) {
+            if (editForm.isFormClosedByBlur) {
               name.destroy();
             }
-            setIsFocus({...isFocus, nameFocus: false});
+            setIsFocus({ ...isFocus, nameFocus: false });
           }}
-          onFocus={() => setIsFocus({...isFocus, nameFocus: true})}
+          onFocus={() => setIsFocus({ ...isFocus, nameFocus: true })}
         />
       </ClientLabel>
       <ClientLabel
@@ -199,21 +255,21 @@ const ClientsForm = ({
           }}
           onBlur={() => {
             secondname.onBlur();
-            if (isClickOutsideModal && client.id) {
+            if (editForm.isFormClosedByBlur) {
               secondname.destroy();
             }
-            setIsFocus({...isFocus, secondnameFocus: false});
+            setIsFocus({ ...isFocus, secondnameFocus: false });
           }}
-          onFocus={() => setIsFocus({...isFocus, secondnameFocus: true})}
+          onFocus={() => setIsFocus({ ...isFocus, secondnameFocus: true })}
         />
       </ClientLabel>
 
       <ClientContactForm
         client={client}
-        setClient={setClient}
-        editForm={editForm}
-        setEditForm={setEditForm}
-        isClickOutsideModal={isClickOutsideModal}
+        // setClient={setClient}
+        // editForm={editForm}
+        // setEditForm={setEditForm}
+        // isClickOutsideModal={isClickOutsideModal}
         contacts={contacts}
         setContacts={setContacts}
       />
@@ -251,7 +307,7 @@ const ClientsForm = ({
           <ClientButton disabled={isValid()} onClick={addNewClient}>
             Сохранить
           </ClientButton>
-          <ClientCancelButton onClick={closeFormModal}>
+          <ClientCancelButton onClick={cancelOperationOnClient}>
             Отмена
           </ClientCancelButton>
         </div>

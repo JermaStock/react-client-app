@@ -1,16 +1,20 @@
 import React from "react";
 import ClientContactButton from "./UI/contactButton/ClientContactButton";
 import ContactField from "./ContactField";
+import { useDispatch } from "react-redux";
+import { changeFormDirtiness } from "../store/formSlice";
 
 const ClientContactForm = ({
   client,
-  setClient,
-  editForm,
-  setEditForm,
-  isClickOutsideModal,
+  // setClient,
+  // editForm,
+  // setEditForm,
+  // isClickOutsideModal,
   contacts,
   setContacts,
 }) => {
+  const dispatch = useDispatch();
+
   const onChangeHandler = (e, index) => {
     let { name, value } = e.target;
     if (!name && !value) {
@@ -19,7 +23,8 @@ const ClientContactForm = ({
     }
     const updatedContacts = [...contacts];
     updatedContacts[index][name] = value;
-    setEditForm({ ...editForm, dirty: true });
+    // setEditForm({ ...editForm, dirty: true });
+    dispatch(changeFormDirtiness({ dirty: true }));
     setContacts(updatedContacts);
   };
 
@@ -35,17 +40,24 @@ const ClientContactForm = ({
       value: "",
       id: Date.now(),
     };
-    setEditForm({ ...editForm, dirty: true });
+    // setEditForm({ ...editForm, dirty: true });
+    dispatch(changeFormDirtiness({ dirty: true }));
     setContacts([...contacts, newContact]);
   };
 
   return (
-    <div className={!contacts.length ? "client-form-contacts" : ["client-form-contacts", "client-form-contacts--active"].join(' ')}>
+    <div
+      className={
+        !contacts.length
+          ? "client-form-contacts"
+          : ["client-form-contacts", "client-form-contacts--active"].join(" ")
+      }
+    >
       {contacts.map((contact, index) => {
         return (
           <ContactField
             client={client}
-            setClient={setClient}
+            // setClient={setClient}
             key={contact.id}
             index={index}
             contacts={contacts}
@@ -53,9 +65,9 @@ const ClientContactForm = ({
             contact={contact}
             onChange={(e) => onChangeHandler(e, index)}
             onDelete={() => onDeleteHandler(index)}
-            editForm={editForm}
-            setEditForm={setEditForm}
-            isClickOutsideModal={isClickOutsideModal}
+            // editForm={editForm}
+            // setEditForm={setEditForm}
+            // isClickOutsideModal={isClickOutsideModal}
           />
         );
       })}

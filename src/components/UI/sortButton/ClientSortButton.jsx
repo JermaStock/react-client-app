@@ -1,13 +1,28 @@
 import React from "react";
 import cl from "./ClientSortButton.module.scss";
+import { useDispatch } from "react-redux";
+import { changeSortType, sortClients } from "../../../store/filterSlice";
 
 const ClientSortButton = ({
   filter,
-  setFilter,
   sortValue,
   title,
-  ...props
+  children,
 }) => {
+  const dispatch = useDispatch();
+  const handleSortClients = () => {
+    dispatch(
+      changeSortType(
+        `${
+          filter["sortType"] === "ascend" && filter["sortBy"] === sortValue
+            ? "descend"
+            : "ascend"
+        }`
+      )
+    );
+    dispatch(sortClients(sortValue));
+  };
+
   const rootClasses = [cl.button];
 
   if (filter.sortBy === sortValue) {
@@ -15,23 +30,10 @@ const ClientSortButton = ({
   }
 
   return (
-    <button
-      className={rootClasses.join(" ")}
-      onClick={() =>
-        setFilter({
-          ...filter,
-          sortType: `${
-            filter["sortType"] === "ascend" && filter["sortBy"] === sortValue
-              ? "descend"
-              : "ascend"
-          }`,
-          sortBy: sortValue,
-        })
-      }
-    >
+    <button className={rootClasses.join(" ")} onClick={handleSortClients}>
       <div className={cl.button__content}>
         <span>{title}</span>
-        {props.children}
+        {children}
       </div>
     </button>
   );

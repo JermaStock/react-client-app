@@ -31,7 +31,6 @@ export const useClients = (clients, filter) => {
   const sortedClients = useSortedClients(clients, filter);
 
   const sortedAndFilteredClients = useMemo(() => {
-    console.log();
     return sortedClients.filter((client) => {
       return [
         String(client.id),
