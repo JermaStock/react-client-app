@@ -8,6 +8,7 @@
     font-size: 8px;
     font-weight: 600;
     line-height: normal;
+    transform: translateY(1px);
     transition: background-color .2s ease-in-out, color .2s ease-in-out;
 
     &:hover {

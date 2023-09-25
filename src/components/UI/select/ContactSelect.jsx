@@ -5,7 +5,6 @@ import { useClickOutside } from "../../../hooks/useClickOutside";
 
 const ContactSelect = ({
   options,
-  value,
   onChange,
   name,
   select,

@@ -18,6 +18,16 @@ export const useSortedClients = (clients, filter) => {
             b[filter.sortBy].localeCompare(a[filter.sortBy])
           );
     }
+    
+    if (filter.sortBy === 'updatedAt' || filter.sortBy === 'createdAt') {
+      return filter.sortType === "ascend"
+        ? formattedClients.sort((a, b) =>
+            new Date(a[filter.sortBy]) - new Date(b[filter.sortBy])
+          )
+        : formattedClients.sort((a, b) =>
+            new Date(b[filter.sortBy]) - new Date(a[filter.sortBy])
+          );
+    }
 
     return filter.sortType === "ascend"
       ? formattedClients.sort((a, b) => a[filter.sortBy] - b[filter.sortBy])

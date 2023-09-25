@@ -9,29 +9,12 @@ import { useInput } from "../hooks/useInput";
 import { destroyInputFields, formatName } from "../utils/utlis";
 import { useDispatch, useSelector } from "react-redux";
 import { clearClient, createClient, editClient } from "../store/clientsSlice";
-import {
-  changeModalVisible,
-  hadndleClickOutsideModal,
-} from "../store/modalSlice";
-import {
-  changeFormOpening,
-  handleFormClosingByBlur,
-  resetFormHandler,
-} from "../store/formSlice";
+import { changeModalVisible } from "../store/modalSlice";
+import { handleFormClosingByBlur, resetFormHandler } from "../store/formSlice";
 
-const ClientsForm = ({
-  // client,
-  // setClient,
-  closeModal,
-  // editForm,
-  // setEditForm,
-  openDeleteModal,
-  // isClickOutsideModal,
-  // setClickOutsideModal,
-}) => {
+const ClientsForm = ({ closeModal, openDeleteModal }) => {
   const client = useSelector((store) => store.clients.client);
   const editForm = useSelector((store) => store.form);
-  const modal = useSelector((store) => store.modal);
   const dispatch = useDispatch();
 
   const { surname, name, secondname } = {
@@ -55,14 +38,18 @@ const ClientsForm = ({
   const [contacts, setContacts] = useState([]);
   const [validationErrors, setValidationErrors] = useState([]);
   const [isFocus, setIsFocus] = useState({
-    surnameFocus: false,
-    nameFocus: false,
-    secondnameFocus: false,
+    surname: false,
+    name: false,
+    secondname: false,
   });
 
   useEffect(() => {
+    destroyInputFields([surname, name, secondname]);
+    surname.initValue(client.surname);
+    name.initValue(client.name);
+    secondname.initValue(client.secondname);
     setContacts(structuredClone(client.contacts));
-  }, [client.contacts]);
+  }, [client]);
 
   useEffect(() => {
     setValidationErrors([
@@ -76,10 +63,8 @@ const ClientsForm = ({
 
   useEffect(() => {
     if (!editForm.opened) {
-      destroyInputFields([surname, name, secondname]);
-      // dispatch(hadndleClickOutsideModal(true));
       dispatch(handleFormClosingByBlur({ isFormClosedByBlur: true }));
-    }
+    } 
   }, [editForm.opened]);
 
   const addNewClient = () => {
@@ -100,29 +85,8 @@ const ClientsForm = ({
     dispatch(clearClient());
     dispatch(changeModalVisible(false));
     destroyInputFields([surname, name, secondname]);
-    // setContacts([]);
+    setContacts([]);
   };
-
-  // const addNewClient = (e) => {
-  //   e.preventDefault();
-  //   const newClient = {
-  //     surname: formatName(surname.value),
-  //     name: formatName(name.value),
-  //     secondname: formatName(secondname.value),
-  //     contacts: [
-  //       ...contacts.map((c) => ({
-  //         type: c.type,
-  //         value: c.value,
-  //         id: c.id,
-  //       })),
-  //     ],
-  //     id: Date.now(),
-  //     createdAt: new Date(),
-  //     updatedAt: new Date(),
-  //   };
-  //   createClient(newClient);
-  //   destroyInputFields([surname, name, secondname]);
-  // };
 
   const changeExistingClient = () => {
     dispatch(
@@ -141,28 +105,9 @@ const ClientsForm = ({
     );
     dispatch(clearClient());
     dispatch(changeModalVisible(false));
+    dispatch(resetFormHandler());
     destroyInputFields([surname, name, secondname]);
   };
-
-  // const changeExistingClient = (e) => {
-  //   e.preventDefault();
-  //   const editedClient = {
-  //     ...client,
-  //     surname: formatName(surname.value),
-  //     name: formatName(name.value),
-  //     secondname: formatName(secondname.value),
-  //     updatedAt: new Date(),
-  //     contacts: [
-  //       ...contacts.map((c) => ({
-  //         type: c.type,
-  //         value: c.value,
-  //         id: c.id,
-  //       })),
-  //     ],
-  //   };
-  //   editClient(editedClient);
-  //   destroyInputFields([surname, name, secondname]);
-  // };
 
   const isValid = () => {
     if (editForm.opened && !editForm.dirty) {
@@ -202,7 +147,7 @@ const ClientsForm = ({
         reqSymbol="*"
         isDanger={surname.isDirty && !surname.inputValid}
         filled={surname.value}
-        isFocus={isFocus.surnameFocus}
+        isFocus={isFocus.surname}
       >
         <ClientInput
           value={surname.value}
@@ -211,13 +156,9 @@ const ClientsForm = ({
           }}
           onBlur={() => {
             surname.onBlur();
-            if (editForm.isFormClosedByBlur) {
-              surname.destroy();
-              console.log("Выход с blur фамилии", client);
-            }
-            setIsFocus({ ...isFocus, surnameFocus: false });
+            setIsFocus({ ...isFocus, surname: false });
           }}
-          onFocus={() => setIsFocus({ ...isFocus, surnameFocus: true })}
+          onFocus={() => setIsFocus({ ...isFocus, surname: true })}
         />
       </ClientLabel>
       <ClientLabel
@@ -225,7 +166,7 @@ const ClientsForm = ({
         reqSymbol="*"
         isDanger={name.isDirty && !name.inputValid}
         filled={name.value}
-        isFocus={isFocus.nameFocus}
+        isFocus={isFocus.name}
       >
         <ClientInput
           value={name.value}
@@ -234,19 +175,16 @@ const ClientsForm = ({
           }}
           onBlur={() => {
             name.onBlur();
-            if (editForm.isFormClosedByBlur) {
-              name.destroy();
-            }
-            setIsFocus({ ...isFocus, nameFocus: false });
+            setIsFocus({ ...isFocus, name: false });
           }}
-          onFocus={() => setIsFocus({ ...isFocus, nameFocus: true })}
+          onFocus={() => setIsFocus({ ...isFocus, name: true })}
         />
       </ClientLabel>
       <ClientLabel
         title="Отчество"
         isDanger={secondname.isDirty && !secondname.inputValid}
         filled={secondname.value}
-        isFocus={isFocus.secondnameFocus}
+        isFocus={isFocus.secondname}
       >
         <ClientInput
           value={secondname.value}
@@ -255,21 +193,14 @@ const ClientsForm = ({
           }}
           onBlur={() => {
             secondname.onBlur();
-            if (editForm.isFormClosedByBlur) {
-              secondname.destroy();
-            }
-            setIsFocus({ ...isFocus, secondnameFocus: false });
+            setIsFocus({ ...isFocus, secondname: false });
           }}
-          onFocus={() => setIsFocus({ ...isFocus, secondnameFocus: true })}
+          onFocus={() => setIsFocus({ ...isFocus, secondname: true })}
         />
       </ClientLabel>
 
       <ClientContactForm
         client={client}
-        // setClient={setClient}
-        // editForm={editForm}
-        // setEditForm={setEditForm}
-        // isClickOutsideModal={isClickOutsideModal}
         contacts={contacts}
         setContacts={setContacts}
       />

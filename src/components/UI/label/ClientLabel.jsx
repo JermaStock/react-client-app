@@ -14,7 +14,6 @@ const ClientLabel = ({
   const rootLabelTitleClasses = [cl.label__title];
   const rootTitleClasses = [cl.label__text];
 
-
   if (isDanger) {
     rootLabelClasses.push(cl.error);
     rootTitleClasses.push(cl.error);

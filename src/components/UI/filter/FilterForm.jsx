@@ -8,7 +8,7 @@ const FilterForm = () => {
 	const onChangeFilterHandler = (e) => dispatch(filterClients(e.target.value));
 
 	return (
-		<form onSubmit={e => e.preventDefault()}>
+		<form className={cl.form} onSubmit={e => e.preventDefault()}>
 			<input 
 				className={cl.input}
 				type="text"

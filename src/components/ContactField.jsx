@@ -4,14 +4,9 @@ import ContactInput from "./UI/contactInput/ContactInput";
 import DeleteContactButton from "./UI/deleteContactButton/DeleteContactButton";
 
 const ContactField = ({
-  // client,
-  // setClient,
   contact,
   onChange,
   onDelete,
-  // editForm,
-  // setEditForm,
-  // isClickOutsideModal,
   index,
 
   contacts,
@@ -89,11 +84,6 @@ const ContactField = ({
         contact={contact}
         name="value"
         onChange={onChange}
-        // client={client}
-        // setClient={setClient}
-        // editForm={editForm}
-        // setEditForm={setEditForm}
-        // isClickOutsideModal={isClickOutsideModal}
         validationRules={validationRules}
         contacts={contacts}
         setContacts={setContacts}

@@ -1,3 +1,10 @@
+.form {
+    @media (max-width: 766px) {
+        width: 100%;
+        flex-grow: 1;
+    }
+}
+
 .input {
     padding: 13px 16px;
     width: 581px;
@@ -9,11 +16,7 @@
     line-height: normal;
 
     @media (max-width: 766px) {
-        width: 250px;
-    }
-
-    @media (max-width: 460px) {
-        width: 100%;
+        width: inherit;
     }
 
     &::placeholder {

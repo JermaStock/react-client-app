@@ -5,6 +5,7 @@ import ClientButton from "./UI/button/ClientButton";
 import { clearClient, deleteClient } from "../store/clientsSlice";
 import { useDispatch } from "react-redux";
 import { changeModalVisible } from "../store/modalSlice";
+import { resetFormHandler } from "../store/formSlice";
 
 const ConfirmationWindow = ({ closeModal }) => {
   const dispatch = useDispatch();
@@ -13,6 +14,7 @@ const ConfirmationWindow = ({ closeModal }) => {
     dispatch(deleteClient());
     dispatch(clearClient());
     dispatch(changeModalVisible(false));
+    dispatch(resetFormHandler());
   };
 
   return (

@@ -6,6 +6,7 @@ import ControlClientButton from "./UI/controlClientButton/ControlClientButton";
 
 import { useSelector } from "react-redux";
 import { useClients } from "../hooks/useClients";
+import DefaultClientRow from "./UI/defaultClientRow/DefaultClientRow";
 
 
 const ClientsList = ({ openEditModal, openDeleteModal }) => {
@@ -15,8 +16,10 @@ const ClientsList = ({ openEditModal, openDeleteModal }) => {
 
   return (
     <tbody className="clients-table__body">
-      {sortedAndFilteredClients.map((client) => (
-        <ClientRow key={client.id}>
+      {sortedAndFilteredClients.length
+        ? 
+        sortedAndFilteredClients.map((client) => (
+          <ClientRow key={client.id}>
           <td className="clients-table__cell">{client.id}</td>
           <td className="clients-table__cell">{client.fullname}</td>
           <ClientDateCell unformattedDate={client.createdAt} />
@@ -38,7 +41,14 @@ const ClientsList = ({ openEditModal, openDeleteModal }) => {
             </div>
           </td>
         </ClientRow>
-      ))}
+        ))
+        :
+        (!sortedAndFilteredClients.length && filter.query)
+        ?
+        <DefaultClientRow title='Поиск не дал результатов'/>
+        :
+        <DefaultClientRow title='Список клиентов пуст'/>
+    }
     </tbody>
   );
 };

@@ -6,10 +6,6 @@ import { changeFormDirtiness } from "../store/formSlice";
 
 const ClientContactForm = ({
   client,
-  // setClient,
-  // editForm,
-  // setEditForm,
-  // isClickOutsideModal,
   contacts,
   setContacts,
 }) => {
@@ -23,7 +19,6 @@ const ClientContactForm = ({
     }
     const updatedContacts = [...contacts];
     updatedContacts[index][name] = value;
-    // setEditForm({ ...editForm, dirty: true });
     dispatch(changeFormDirtiness({ dirty: true }));
     setContacts(updatedContacts);
   };
@@ -40,7 +35,6 @@ const ClientContactForm = ({
       value: "",
       id: Date.now(),
     };
-    // setEditForm({ ...editForm, dirty: true });
     dispatch(changeFormDirtiness({ dirty: true }));
     setContacts([...contacts, newContact]);
   };
@@ -57,7 +51,6 @@ const ClientContactForm = ({
         return (
           <ContactField
             client={client}
-            // setClient={setClient}
             key={contact.id}
             index={index}
             contacts={contacts}
@@ -65,9 +58,6 @@ const ClientContactForm = ({
             contact={contact}
             onChange={(e) => onChangeHandler(e, index)}
             onDelete={() => onDeleteHandler(index)}
-            // editForm={editForm}
-            // setEditForm={setEditForm}
-            // isClickOutsideModal={isClickOutsideModal}
           />
         );
       })}

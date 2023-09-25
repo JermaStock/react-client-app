@@ -6,17 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { changeFormDirtiness } from "../../../store/formSlice";
 
 const ContactInput = ({
-  // client,
-  // setClient,
   contact: { value, type },
   onChange,
   name,
   validationRules,
-  // editForm,
-  // setEditForm,
-  // isClickOutsideModal,
   index,
-
   contacts,
   setContacts,
 }) => {
@@ -46,7 +40,6 @@ const ContactInput = ({
   }, []);
 
   useEffect(() => {
-    console.log('ебано', editForm);
     if (editForm.dirty) {
       const validatedContacts = [...contacts];
       const newError = inputField;
@@ -74,7 +67,6 @@ const ContactInput = ({
       onBlur={() => {
         inputField.onBlur();
         if (editForm.opened) {
-          // setEditForm({ ...editForm, dirty: true });
           dispatch(changeFormDirtiness({ dirty: true }));
         }
 
@@ -96,7 +88,6 @@ const ContactInput = ({
       onBlur={() => {
         inputField.onBlur();
         if (editForm.opened) {
-          // setEditForm({ ...editForm, dirty: true });
           dispatch(changeFormDirtiness({ dirty: true }));
         } 
 
