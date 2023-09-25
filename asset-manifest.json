@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/books-app/static/css/main.b832685c.css",
-    "main.js": "/books-app/static/js/main.6527260d.js",
-    "static/media/OpenSans-SemiBold.woff2": "/books-app/static/media/OpenSans-SemiBold.8a88f36e60c6ff0eca37.woff2",
-    "static/media/OpenSans-Bold.woff2": "/books-app/static/media/OpenSans-Bold.526193d265a6eda40589.woff2",
-    "static/media/OpenSans-Regular.woff2": "/books-app/static/media/OpenSans-Regular.864f48d4e0fd47ad9daf.woff2",
-    "index.html": "/books-app/index.html",
-    "main.b832685c.css.map": "/books-app/static/css/main.b832685c.css.map",
-    "main.6527260d.js.map": "/books-app/static/js/main.6527260d.js.map"
+    "main.css": "/react-client-app/static/css/main.e40e7ddd.css",
+    "main.js": "/react-client-app/static/js/main.b174e3a7.js",
+    "static/media/OpenSans-SemiBold.woff2": "/react-client-app/static/media/OpenSans-SemiBold.8a88f36e60c6ff0eca37.woff2",
+    "static/media/OpenSans-Bold.woff2": "/react-client-app/static/media/OpenSans-Bold.526193d265a6eda40589.woff2",
+    "static/media/OpenSans-Regular.woff2": "/react-client-app/static/media/OpenSans-Regular.864f48d4e0fd47ad9daf.woff2",
+    "index.html": "/react-client-app/index.html",
+    "main.e40e7ddd.css.map": "/react-client-app/static/css/main.e40e7ddd.css.map",
+    "main.b174e3a7.js.map": "/react-client-app/static/js/main.b174e3a7.js.map"
   },
   "entrypoints": [
-    "static/css/main.b832685c.css",
-    "static/js/main.6527260d.js"
+    "static/css/main.e40e7ddd.css",
+    "static/js/main.b174e3a7.js"
   ]
 }
